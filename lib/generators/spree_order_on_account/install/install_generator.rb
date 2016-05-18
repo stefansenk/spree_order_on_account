@@ -28,6 +28,7 @@ module SpreeOrderOnAccount
       # end
 
       def create_role
+        load 'spree/role.rb'
         Spree::Role.where(name: 'order_on_account').first_or_create
       end
 

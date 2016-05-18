@@ -1,7 +1,9 @@
 Spree Order On Account
 ======================
 
-Adds an option the the Spree::User to allow order on account. Provides a OrderOnAccount payment method which allows enabled account to complete the checkout without a payment.
+[![Build Status](https://travis-ci.org/stefansenk/spree_order_on_account.svg?branch=master)](https://travis-ci.org/stefansenk/spree_order_on_account)
+
+Adds an option the the spree user to allow order on account. Provides an OrderOnAccount payment method which allows enabled accounts to complete the checkout without a payment.
 
 ## Installation
 
