@@ -15,6 +15,10 @@ module SpreeOrderOnAccount
       end
     end
 
+    config.after_initialize do
+      Rails.application.config.spree.payment_methods << Spree::PaymentMethod::PaymentOnAccount
+    end
+
     config.to_prepare &method(:activate).to_proc
   end
 end

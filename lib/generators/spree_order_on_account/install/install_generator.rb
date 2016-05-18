@@ -14,18 +14,29 @@ module SpreeOrderOnAccount
         inject_into_file 'vendor/assets/stylesheets/spree/backend/all.css', " *= require spree/backend/spree_order_on_account\n", :before => /\*\//, :verbose => true
       end
 
-      def add_migrations
-        run 'bundle exec rake railties:install:migrations FROM=spree_order_on_account'
+      # def add_migrations
+      #   run 'bundle exec rake railties:install:migrations FROM=spree_order_on_account'
+      # end
+
+      # def run_migrations
+      #   run_migrations = options[:auto_run_migrations] || ['', 'y', 'Y'].include?(ask 'Would you like to run the migrations now? [Y/n]')
+      #   if run_migrations
+      #     run 'bundle exec rake db:migrate'
+      #   else
+      #     puts 'Skipping rake db:migrate, don\'t forget to run it!'
+      #   end
+      # end
+
+      def create_role
+        Spree::Role.where(name: 'order_on_account').first_or_create
       end
 
-      def run_migrations
-        run_migrations = options[:auto_run_migrations] || ['', 'y', 'Y'].include?(ask 'Would you like to run the migrations now? [Y/n]')
-        if run_migrations
-          run 'bundle exec rake db:migrate'
-        else
-          puts 'Skipping rake db:migrate, don\'t forget to run it!'
+      def create_payment_method
+        unless Spree::PaymentMethod::PaymentOnAccount.where(name: "Payment on account").any?
+          Spree::PaymentMethod::PaymentOnAccount.create(name: "Payment on account", description: "Pay on account.", active: true)
         end
       end
+
     end
   end
 end
